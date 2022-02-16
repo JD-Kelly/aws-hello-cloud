@@ -31,7 +31,7 @@ jobs:
           pip install pytest
           pip install pytest-cov
           pytest sample_unit_tests.py
-
+jobs:
   deploy:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
