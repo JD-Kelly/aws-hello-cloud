@@ -31,3 +31,10 @@ jobs:
           pip install pytest
           pip install pytest-cov
           pytest sample_unit_tests.py
+
+  deploy:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::123456789100:role/my-github-actions-role
+        aws-region: eu-west-2
