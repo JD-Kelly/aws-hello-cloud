@@ -31,6 +31,19 @@ jobs:
           pip install pytest
           pip install pytest-cov
           pytest sample_unit_tests.py
-      - name: "Configure AWS Credentials" Action For GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v1
+  deploy:
+    name: Upload to Amazon S3
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
+      - name: Configure AWS credentials from account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::498029393533:role/my-github-actions-role-test
+          aws-region: eu-west-2
